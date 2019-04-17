@@ -6,7 +6,6 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-awscli = "*"
 
 [requires]
 python_version = "2.7"
