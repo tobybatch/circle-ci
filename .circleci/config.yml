@@ -46,7 +46,7 @@ jobs:
           name: This is develop
           command: |
             echo "This is develop"
-            ls
+            ls /home/circleci/repo
             pwd
 
   deploy-master:
@@ -58,7 +58,7 @@ jobs:
           name: This is master
           command: |
             echo "This is master"
-            ls
+            ls /home/circleci/repo
             pwd
 
 
