@@ -7,32 +7,23 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.6.1
-
     working_directory: ~/repo
-
     steps:
       - checkout
-
-      # Download and cache dependencies
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "Pipfile.lock" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-
       - run:
           name: install dependencies
           command: |
             sudo pip install pipenv
             pipenv install --dev
-            pwd
-            ls
-
       - save_cache:
           paths:
             - $HOME/.local/share/virtualenvs
           key: v1-dependencies-{{ checksum "Pipfile.lock" }}
-
       - store_artifacts:
           path: htmlcov/
           destination: htmlcov/
@@ -40,28 +31,50 @@ jobs:
   deploy-develop:
     docker:
       - image: circleci/python:3.6.1
-    working_directory: /tmp/my-project
+    working_directory: ~/repo
     steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Pipfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run:
-          name: This is develop
+          name: install dependencies
           command: |
-            echo "This is develop"
-            ls /home/circleci/repo
-            pwd
+            sudo pip install pipenv
+            pipenv install --dev
+      - save_cache:
+          paths:
+            - $HOME/.local/share/virtualenvs
+          key: v1-dependencies-{{ checksum "Pipfile.lock" }}
+      - store_artifacts:
+          path: htmlcov/
+          destination: htmlcov/
 
   deploy-master:
     docker:
-      - image: ubuntu:14.04
-    working_directory: /tmp/my-project
+      - image: circleci/python:3.6.1
+    working_directory: ~/repo
     steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Pipfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
       - run:
-          name: This is master
+          name: install dependencies
           command: |
-            echo "This is master"
-            ls /home/circleci/repo
-            pwd
-
-
+            sudo pip install pipenv
+            pipenv install --dev
+      - save_cache:
+          paths:
+            - $HOME/.local/share/virtualenvs
+          key: v1-dependencies-{{ checksum "Pipfile.lock" }}
+      - store_artifacts:
+          path: htmlcov/
+          destination: htmlcov/
 
 workflows:
   version: 2
