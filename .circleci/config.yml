@@ -44,3 +44,19 @@ jobs:
       - store_artifacts:
           path: htmlcov/
           destination: htmlcov/
+
+      - run:
+          name: This is master
+          command: |
+            echo "This is master"
+          filters:
+            branches:
+              only: master
+
+      - run:
+          name: This is develop
+          command: |
+            echo "This is develop"
+          filters:
+            branches:
+              only: develop
