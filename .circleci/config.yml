@@ -35,7 +35,7 @@ jobs:
           path: htmlcov/
           destination: htmlcov/
 
-	deploy-stage:
+  deploy-stage:
     docker:
       - image: circleci/python:3.6.1
     working_directory: /tmp/my-project
@@ -45,7 +45,7 @@ jobs:
           command: |
             echo "This is develop"
 
-	deploy-prod:
+  deploy-prod:
     docker:
       - image: ubuntu:14.04
     working_directory: /tmp/my-project
