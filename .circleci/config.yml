@@ -44,6 +44,8 @@ jobs:
           name: This is develop
           command: |
             echo "This is develop"
+            ls
+            pwd
 
   deploy-master:
     docker:
@@ -54,6 +56,8 @@ jobs:
           name: This is master
           command: |
             echo "This is master"
+            ls
+            pwd
 
 
 
