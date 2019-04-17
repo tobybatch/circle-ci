@@ -33,7 +33,6 @@ jobs:
           name: install dependencies
           command: |
             sudo pip install pipenv
-            cp .env.example .env
             pipenv install --dev
 
       - save_cache:
